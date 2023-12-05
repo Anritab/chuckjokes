@@ -15,4 +15,28 @@
     <p>Check out this Chuck Norris joke: <a href="{{ url_for('joke') }}">Get a Joke</a></p>
     <button onclick="changeColor()">Change Color</button>
 </body>
+
+<head>
+    <title>Dragon Curve</title>
+</head>
+<body>
+    <h1>Dragon Curve</h1>
+    <button onclick="drawDragon()">Draw Dragon</button>
+    <div id="dragonImage"></div>
+
+    <script>
+        function drawDragon() {
+            fetch('/draw_dragon')
+                .then(response => response.blob())
+                .then(blob => {
+                    const imgUrl = URL.createObjectURL(blob);
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    document.getElementById('dragonImage').innerHTML = '';
+                    document.getElementById('dragonImage').appendChild(img);
+                });
+        }
+    </script>
+</body>
+
 </html>
